@@ -54,7 +54,7 @@ def login():
 def dashboard():
     if "username" not in session:
         return redirect("/login")
-    
+
     username = session["username"]
     return render_template("dashboard.html", username=username)
 
@@ -67,9 +67,17 @@ def logout():
 def register():
 
     if request.method == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
-        confirm_password = request.form.get("confirm_password")
+        username = request.form.get("username", "").strip()
+        password = request.form.get("password", "")
+        confirm_password = request.form.get("confirm_password", "")
+
+        if not username or not password or not confirm_password:
+            return "All fields are required"
+
+        existing_user = User.query.filter_by(username=username).first()
+
+        if existing_user:
+            return "Username already exists"
 
         if password != confirm_password:
             return "passwords do not match"
