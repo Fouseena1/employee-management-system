@@ -20,9 +20,17 @@ def login():
     return render_template("login.html")
 
 
-@app.route('/register')
+@app.route('/register', methods=["GET", "POST"])
 def register():
-    return "Register Page"
+
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        confirm_password = request.form.get("confirm_password")
+
+        return f"username: {username}, password: {password}, confirm_password: {confirm_password}"
+
+    return render_template("register.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
