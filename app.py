@@ -1,8 +1,12 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
+
+app.secret_key = os.getenv("SECRET_KEY")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 
@@ -39,13 +43,17 @@ def login():
             return "Invalid username or password"
 
         if check_password_hash(user.hashed_password, password):
-            return "Login Successful"
+            session["username"] = user.username
+            return redirect("/dashboard")
 
         return "Invalid username or password"
 
     return render_template("login.html")
 
-
+@app.route("/dashboard")
+def dashboard():
+    username = session["username"]
+    return render_template("dashboard.html", username=username)
 @app.route('/register', methods=["GET", "POST"])
 def register():
 
