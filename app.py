@@ -52,8 +52,17 @@ def login():
 
 @app.route("/dashboard")
 def dashboard():
+    if "username" not in session:
+        return redirect("/login")
+    
     username = session["username"]
     return render_template("dashboard.html", username=username)
+
+@app.route("/logout")
+def logout():
+    session.pop("username", None)
+    return redirect("/login")
+
 @app.route('/register', methods=["GET", "POST"])
 def register():
 
