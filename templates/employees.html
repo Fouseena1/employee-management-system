@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employees</title>
+</head>
+
+<body>
+
+    <h1>Employee List</h1>
+
+<table border="1">
+
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Salary</th>
+    </tr>
+
+    {% for employee in employees %}
+    <tr>
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.department }}</td>
+        <td>{{ employee.salary }}</td>
+
+        <td>
+            <a href="/edit_employee/{{ employee.id }}">Edit</a>
+
+        <form action="/delete_employee/{{ employee.id }}" method="POST">
+            <button type="submit">Delete</button>
+        </form>
+    </tr>
+    {% endfor %}
+
+</table>
+</body>
+</html>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session,  redirect ,url_for
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv
@@ -19,6 +19,16 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     hashed_password = db.Column(db.String(200), nullable=False)
+
+
+class Employee(db.Model):
+    __tablename__ = "employees"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    department = db.Column(db.String(100), nullable=False)
+    salary = db.Column(db.Integer, nullable=False)
 
 
 with app.app_context():
@@ -95,6 +105,60 @@ def register():
         return "Registration Successful"
 
     return render_template("register.html")
+
+@app.route("/add_employee", methods=["GET", "POST"])
+def add_employee():
+
+    if request.method == "POST":
+        name = request.form.get("name", "").strip()
+        email = request.form.get("email", "").strip()
+        department = request.form.get("department", "").strip()
+        salary = request.form.get("salary", "")
+
+        employee = Employee(
+            name=name,
+            email=email,
+            department=department,
+            salary=salary
+        )
+
+        db.session.add(employee)
+        db.session.commit()
+
+        return "employee added successfully"
+
+    return render_template("add_employee.html")
+
+@app.route("/employees")
+def employees():
+    employees = Employee.query.all()
+
+    return render_template("employees.html", employees=employees)
+
+@app.route("/edit_employee/<int:id>", methods=["GET", "POST"])
+def edit_employee(id):
+    employee = Employee.query.get_or_404(id)
+
+    if request.method == "POST":
+        employee.name = request.form.get("name", "").strip()
+        employee.email = request.form.get("email", "").strip()
+        employee.department = request.form.get("department", "").strip()
+        employee.salary = request.form.get("salary", "")
+
+        db.session.commit()
+
+        return "Employee updated successfully"
+
+    return render_template("edit_employee.html", employee=employee)
+
+@app.route("/delete_employee/<int:id>", methods=["POST"])
+def delete_employee(id):
+    employee = Employee.query.get_or_404(id)
+
+    db.session.delete(employee)
+    db.session.commit()
+
+    return redirect(url_for("employees"))
 
 if __name__ == "__main__":
     app.run(debug=True)
