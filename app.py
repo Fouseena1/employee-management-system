@@ -109,6 +109,9 @@ def register():
 @app.route("/add_employee", methods=["GET", "POST"])
 def add_employee():
 
+    if "username" not in session:
+        return redirect(url_for("login"))
+
     if request.method == "POST":
         name = request.form.get("name", "").strip()
         email = request.form.get("email", "").strip()
@@ -131,12 +134,20 @@ def add_employee():
 
 @app.route("/employees")
 def employees():
+
+    if "username" not in session:
+        return redirect(url_for("login"))
+
     employees = Employee.query.all()
 
     return render_template("employees.html", employees=employees)
 
 @app.route("/edit_employee/<int:id>", methods=["GET", "POST"])
 def edit_employee(id):
+
+    if "username" not in session:
+        return redirect(url_for("login"))
+
     employee = Employee.query.get_or_404(id)
 
     if request.method == "POST":
@@ -153,6 +164,10 @@ def edit_employee(id):
 
 @app.route("/delete_employee/<int:id>", methods=["POST"])
 def delete_employee(id):
+
+    if "username" not in session:
+        return redirect(url_for("login"))
+    
     employee = Employee.query.get_or_404(id)
 
     db.session.delete(employee)
