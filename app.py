@@ -19,6 +19,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     hashed_password = db.Column(db.String(200), nullable=False)
+    role = db.Column(db.String(20), nullable=False, default="employee")
 
 
 class Employee(db.Model):
@@ -54,7 +55,13 @@ def login():
 
         if check_password_hash(user.hashed_password, password):
             session["username"] = user.username
-            return redirect("/dashboard")
+            session["role"] = user.role
+
+            if user.role == "admin":
+                return redirect("/admin-dashboard")
+
+            else:
+                return redirect("/employee-dashboard")
 
         return "Invalid username or password"
 
@@ -174,6 +181,29 @@ def delete_employee(id):
     db.session.commit()
 
     return redirect(url_for("employees"))
+
+@app.route("/admin-dashboard")
+def admin_dashboard():
+
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    if session.get("role") != "admin":
+        return "Access Denied"
+
+    return render_template("admin_dashboard.html")
+
+
+@app.route("/employee-dashboard")
+def employee_dashboard():
+
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    if session.get("role") != "employee":
+        return "Access Denied"
+
+    return render_template("employee_dashboard.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
