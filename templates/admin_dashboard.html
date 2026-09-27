@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 <body>
 
-    <h1>Welcome Admin</h1>
+    <h1>Admin Dashboard</h1>
 
-    <p>This is the admin dashboard</p>
+    <p>Welcome Admin</p>
+
+    <br>
+<div class="dashboard-links">
+
+    <a href="{{ url_for('add_employee') }}">Add Employee</a>
+
+    <br>
+
+    <a href="{{ url_for('employees') }}">Employee List</a>
+
+    <br>
+
+    <a href="{{ url_for('leave_requests') }}">Leave Requests</a>
+
+    <br>
+
+    <a href="{{ url_for('logout') }}">Logout</a>
+</div>
 
 </body>
 </html>

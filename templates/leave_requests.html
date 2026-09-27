@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Leave Requests</title>
+
+</head>
+
+<body>
+
+  <h1>Leave Requests</h1>
+
+  {% for leave, employee in employee_data %}
+
+
+  <hr>
+
+  <p><strong>Employee Name:</strong> {{ employee.name }}</p>
+
+  <p><strong>Start Date:</strong> {{ leave.start_date }}</p>
+
+  <p><strong>End Date:</strong> {{ leave.end_date }}</p>
+
+  <p><strong>Reason:</strong> {{ leave.reason }}</p>
+
+  <p><strong>Status:</strong> {{ leave.status }}</p>
+
+  <form action="{{ url_for('approve_leave', id=leave.id) }}" method="POST">
+    <button type="submit">Approve</button>
+</form>
+
+  <br>
+
+  <form action="{{ url_for('reject_leave', id=leave.id) }}" method="POST">
+    <button type="submit">Reject</button>
+</form>
+  {% endfor %}
+
+  <br>
+
+  <a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+
+</body>
+</html>

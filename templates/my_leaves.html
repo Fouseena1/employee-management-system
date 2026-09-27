@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>My Leaves</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+  <h1>My Leave Requests</h1>
+
+  {% for leave in leaves %}
+
+  <hr>
+
+  <p><strong>Start Date:</strong>{{ leave.start_date }}</p>
+
+  <p><strong>End Date:</strong>{{ leave.end_date }}</p>
+
+  <p><strong>Reason:</strong>{{ leave.reason }}</p>
+
+  <p><strong>Status:</strong>{{ leave.status }}</p>
+
+  {% endfor %}
+
+  <br>
+
+  <a href="{{ url_for('employee_dashboard') }}">
+    Back to Dashboard
+  </a>
+
+</body>
+</html>

@@ -1,13 +1,156 @@
+/* General page styling */
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
-    margin-top: 100px;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f8;
+    color: #333;
 }
 
+/* Headings */
 h1 {
-    font-size: 40px;
+    text-align: center;
+    margin: 30px 0;
+    color: #222;
 }
 
+h2 {
+    color: #333;
+}
+
+/* Paragraphs */
 p {
-    font-size: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Navigation */
+nav {
+    background-color: #222;
+    padding: 15px;
+    text-align: center;
+}
+
+nav a {
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+nav button {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+/* Links */
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Buttons */
+button {
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Forms */
+form {
+    width: 400px;
+    max-width: 90%;
+    margin: 30px auto;
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+/* Tables */
+table {
+    width: 90%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th,
+td {
+    padding: 4px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.profile-card {
+    width: 400px;
+    max-width: 90%;
+    margin: 30px auto;
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+/* Dashboard links */
+.dashboard-links {
+    width: 400px;
+    max-width: 90%;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.dashboard-links a{
+    display: block;
+    margin: 15px 0;
+    padding: 12px;
+    background-color: white;
+    border-radius: 6px;
+}
+
+.dashboard-links a:hover {
+    background-color: #e9ecef;
+}
+
+/* Features */
+.features {
+    width: 90%;
+    margin: 40px auto;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.feature {
+    background-color: white;
+    padding: 25px;
+    width: 250px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+}
+
+td form {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
 }

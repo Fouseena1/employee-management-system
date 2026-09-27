@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <title>Employee Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
+
 <body>
 
-    <h1>Welcome Employee</h1>
+    <h1>Employee Dashboard</h1>
 
-    <p>This is the employee page</p>
+    <p>Welcome Employee</p>
+
+    <br>
+<div class="dashboard-links">
+
+    <a href="{{ url_for('my_profile') }}">My Profile</a>
+
+    <br>
+
+    <a href="{{ url_for('apply_leave') }}">Apply Leave</a>
+
+    <br>
+
+    <a href="{{ url_for('my_leaves') }}">My Leaves</a>
+
+    <br>
+
+    <a href="{{ url_for('logout') }}">Logout</a>
+</div>
 
 </body>
 </html>

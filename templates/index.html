@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <title>Employee Management System</title>
 
     <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
+
 </head>
 
 <body>
@@ -11,12 +13,33 @@
 <nav>
     <a href="/"><button>Home</button></a>
     <a href="/login"><button>Login</button></a>
-    <a href="/register"><button>Register</button></a>
+
 </nav>
 
     <h1>Employee Management System</h1>
 
     <p> Welcome to our employee management system</p>
+
+    <p>Manage employees, employee profiles, and leave requests easily through one simple system.</p>
+
+<div class="features">
+
+    <div class="feature">
+        <h2>Employee Management</h2>
+        <p>Manage employee details easily.</p>
+    </div>
+
+
+    <div class="feature">
+    <h2>Leave Management</h2>
+    <p>Employees can apply for leave and admins can approve or reject requests.</p>
+    </div>
+
+<div class="feature">
+    <h2>Role-Based Access</h2>
+    <p>Separate dashboards and permissions for Admin and Employees.</p>
+    </div>
+</div>
 
 </body>
 </html>

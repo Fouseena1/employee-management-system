@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>My Profile</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+    <h1>My Profile</h1>
+
+<div class="profile-card">
+
+    <p><strong>Name:</strong>  {{ employee.name }}</p>
+
+    <p><strong>Email:</strong> {{ employee.email }}</p>
+
+    <p><strong>Department:</strong> {{ employee.department }}</p>
+
+    <p><strong>Salary:</strong> {{ employee.salary }}</p>
+
+</div>
+    <br><br>
+
+    <a href="{{ url_for('employee_dashboard') }}">Back to Dashboard</a>
+
+</body>
+</html>
